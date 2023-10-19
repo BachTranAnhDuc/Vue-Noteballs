@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import ViewNotes from '@/views/ViewNotes.vue'
+import ShareLayout from '@/layout/ShareLayout.vue'
 import ViewStats from '@/views/ViewStats.vue'
+import ViewNotes from '@/views/ViewNotes.vue'
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -8,13 +9,18 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'notes',
-      component: ViewNotes
-    },
-    {
-      path: '/stats',
-      name: 'stats',
-      component: ViewStats
+      name: 'global',
+      component: ShareLayout,
+      children: [
+        {
+          path: '/',
+          component: ViewNotes
+        },
+        {
+          path: '/stats',
+          component: ViewStats
+        }
+      ]
     }
   ]
 })
